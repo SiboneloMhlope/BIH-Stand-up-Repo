@@ -1,0 +1,146 @@
+```html pe
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grosery expense tracker</title>
+
+    <style>
+        body {
+            margin: 40px;
+        }
+
+        input, select, button {
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 500px;
+        }
+
+        th, td {
+            border: 1px solid;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Grosery expense tracker</h1>
+
+    <p>Track of your spending as a student</p>
+
+    <hr>
+    <hr>
+
+
+    <h2>Add an expense</h2>
+
+    <form id="expenseForm">
+
+        <label for="expense">Food:</label>
+        <br>
+        <input type="text" id="expense" placeholder="e.g. Burger" required>
+
+        <br><br>
+
+        <label for="amount">Amount:</label>
+        <br>
+        <input type="number" id="amount" placeholder="e.g. 250" required>
+
+        <br><br>
+
+        <label for="category">Category:</label>
+        <br>
+
+        <select id="category">
+            <option value="fast food">Junk food</option>
+            <option value="iGroza">Grosary</option>
+            <option value="okuphuzwayo">Drinks</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Add Expense</button>
+
+    </form>
+
+    <hr>
+
+    <h2>My Expenses</h2>
+
+    <table>
+
+        <tr>
+            <th>Food type</th>
+            <th>Category</th>
+            <th>Amount</th>
+        </tr>
+
+        <tbody id="expenseList">
+        <!-- the new food will appear here -->
+        </tbody>
+
+    </table>
+
+    <h2>Total Expenses: R<span id="total">0</span></h2>
+
+
+    <script>
+
+        // the "getElementById" gets these elements from HTML for js
+        const form = document.getElementById("expenseForm");
+        const expenseList = document.getElementById("expenseList");
+        const total = document.getElementById("total");
+
+        let totalAmount = 0;
+
+
+        // function for submitting the form
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+
+            const expense = document.getElementById("expense").value;
+            const amount = Number(document.getElementById("amount").value);
+            const category = document.getElementById("category").value;
+
+
+            // this creates a new table row
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${expense}</td>
+                <td>${category}</td>
+                <td>R${amount}</td>
+            `;
+
+
+            // and this adds the row to the table
+            expenseList.appendChild(row);
+
+
+            totalAmount = totalAmount + amount;
+
+            total.textContent = totalAmount;
+
+
+            // this removes the values on Add an expense so that we can enter another food expense automsatically
+            form.reset();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+```
